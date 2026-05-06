@@ -1,0 +1,18 @@
+
+
+
+helper.js
+
+module.export = calcularCostoTotal
+
+export function calcularCostoTotal(precioBase, cantidad){
+    return precioBase * cantidad;
+}
+
+
+main.js
+
+import {calcularCostoTotal} from './helpers.js';
+
+const resultado = calcularCostoTotal(150,3);
+console.log (resultado);
