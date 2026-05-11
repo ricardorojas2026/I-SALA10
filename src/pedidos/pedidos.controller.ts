@@ -1,0 +1,39 @@
+import { Controller, Post, Body, Param, Patch, Get, Query } from '@nestjs/common';
+import { PedidosService } from './pedidos.service';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guards';
+import { CreatePedidoDto } from './dto/create.pedido.dto';
+import { AddItemDto } from './dto/add.item.dto';
+
+@Controller('api/pedidos')
+export class PedidosController {
+    constructor(private readonly pedidosService: PedidosService) { }
+
+    @Post()
+    @UseGuards(JwtAuthGuard)
+    create(@Body() dto: CreatePedidoDto) {
+        return this.pedidosService.create(dto);
+    }
+
+    @Post(':id/items')
+    @UseGuards(JwtAuthGuard)
+    addItem(@Param('id') id: string, @Body() body: AddItemDto) {
+        return this.pedidosService.addItem(id, body);
+    }
+
+    @Patch(':id/estado')
+    @UseGuards(JwtAuthGuard)
+    cambiarEstado(@Param('id') id: string, @Body() body: { estadoPedido: string }) {
+        return this.pedidosService.cambiarEstado(id, body.estadoPedido);
+    }
+
+    @Get()
+    findAll(@Query('estadoPedido') estadoPedido?: string) {
+        return this.pedidosService.findAll(estadoPedido);
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.pedidosService.findOne(id);
+    }
+}
