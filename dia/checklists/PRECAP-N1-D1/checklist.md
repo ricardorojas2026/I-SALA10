@@ -20,5 +20,5 @@ loom:
 
 \- \[X] B — permisos + variables + procesos
 
-\- \[] FINAL
+\- \[X] FINAL
 
