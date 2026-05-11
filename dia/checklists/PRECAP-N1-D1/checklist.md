@@ -18,7 +18,7 @@ loom:
 
 \- \[X] A — comandos
 
-\- \[ ] B — permisos + variables + procesos
+\- \[X] B — permisos + variables + procesos
 
-\- \[ ] FINAL
+\- \[] FINAL
 
