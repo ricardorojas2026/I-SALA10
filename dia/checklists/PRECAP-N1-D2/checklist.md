@@ -14,13 +14,11 @@ loom:
 
 \## Bloques
 
-\- \[ ] VIDEOS — Docker Módulo 1 (conceptos e imágenes)
+\- \[X] VIDEOS — Docker Módulo 1 (conceptos e imágenes)
 
 \- \[ ] A — Práctica contenedores: ciclo de vida + imágenes
 
 \- \[ ] B — Práctica redes + volúmenes
 
 \- \[ ] FINAL — Reflexión + evidencia + Loom
-
-
 
