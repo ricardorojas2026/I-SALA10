@@ -16,7 +16,7 @@ loom:
 
 \- \[X] VIDEOS — Docker Módulo 1 (conceptos e imágenes)
 
-\- \[ ] A — Práctica contenedores: ciclo de vida + imágenes
+\- \[X] A — Práctica contenedores: ciclo de vida + imágenes
 
 \- \[ ] B — Práctica redes + volúmenes
 
