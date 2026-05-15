@@ -109,7 +109,7 @@ mi-nginx
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 docker rm mi-nginx && docker ps -a
-}mi-nginx
+mi-nginx
 CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
 d054a681465e   hello-world   "/hello"   12 minutes ago   Exited (0) 12 minutes ago             great_jackson
 3ba30326ff0a   hello-world   "/hello"   3 days ago       Exited (0) 3 days ago                 great_cohen
