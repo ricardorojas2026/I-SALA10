@@ -109,7 +109,7 @@ mi-nginx
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 docker rm mi-nginx && docker ps -a
-mi-nginx
+}mi-nginx
 CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
 d054a681465e   hello-world   "/hello"   12 minutes ago   Exited (0) 12 minutes ago             great_jackson
 3ba30326ff0a   hello-world   "/hello"   3 days ago       Exited (0) 3 days ago                 great_cohen
@@ -119,5 +119,102 @@ docker rmi nginx
 Untagged: nginx:latest
 Deleted: sha256:06aa3d7be10bc6307990c81bdca075793132e9163391abc370c015e344e23128
 
+Práctica B1 — Redes y mapeo de puertos
+
+docker network ls
+
+NETWORK ID     NAME      DRIVER    SCOPE
+90c36ad242a7   bridge    bridge    local
+aeb728961af8   host      host      local
+6bb1b05da4c0   none      null      local
+
+docker network create mi-red
+456a8b80cc52b0b8a34546514972357be4a553b92174bd559b83b76c442f18e4
+
+docker run -d --name servidor --network mi-red nginx
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+735e1c628373: Pull complete 
+030365c1a354: Pull complete 
+834a05acfff4: Pull complete 
+57fb71246055: Pull complete 
+9f7bde970101: Pull complete 
+60ad0c2ccfc6: Pull complete 
+1bb34ee717a4: Pull complete 
+89fc4d629470: Download complete 
+73d0e4d315b3: Download complete 
+Digest: sha256:06aa3d7be10bc6307990c81bdca075793132e9163391abc370c015e344e23128
+Status: Downloaded newer image for nginx:latest
+6f7b0ddf6d9828274f67452679bae3a07aed92d1deebf150e05087a117ff8181
+
+docker run -d --name cliente --network mi-red alpine sleep 3600
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+6a0ac1617861: Pull complete 
+a63813f19ccb: Download complete 
+4e0cb4ac63e7: Download complete 
+Digest: sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
+Status: Downloaded newer image for alpine:latest
+2eec8d188b6562b9c89918cf27f7828f2249f97c3ace42cf4e0c4190e8e68cbd
+
+docker exec cliente ping servidor -c 3
+PING servidor (172.18.0.2): 56 data bytes
+64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.206 ms
+64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.075 ms
+64 bytes from 172.18.0.2: seq=2 ttl=64 time=0.085 ms
+
+--- servidor ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.075/0.122/0.206 ms
+
+docker stop servidor cliente && docker rm servidor cliente
+servidor
+cliente
+servidor
+cliente
+
+docker run -d --name nginx-pub -p 8080:80 nginx
+dc224be26965440f7b5fdc47ef67fdc4cfe17ac02ab881c829505e4b47d4a9ac
+
+Welcome to nginx!
+If you see this page, nginx is successfully installed and working. Further configuration is required for the web server, reverse proxy, API gateway, load balancer, content cache, or other features.
+
+For online documentation and support please refer to nginx.org.
+To engage with the community please visit community.nginx.org.
+For enterprise grade support, professional services, additional security features and capabilities please refer to f5.com/nginx.
+
+Thank you for using nginx.
+
+docker stop nginx-pub && docker rm nginx-pub
+nginx-pub
+nginx-pub
+
+
+Práctica B2 — Volúmenes y persistencia
+
+docker volume create mi-volumen
+mi-volumen
+
+docker run -d --name vol-test -v mi-volumen:/data alpine sleep 3600
+ac9978f37f133e07518ab2cfaa7ff7804949997ad80395c462a2b3799dcfeefe
+
+docker exec vol-test sh -c "echo OpenClaw > /data/prueba.txt"
+
+docker exec vol-test cat /data/prueba.txt
+OpenClaw
+
+docker stop vol-test && docker rm vol-test
+vol-test
+vol-test
+
+docker run --rm -v mi-volumen:/data alpine cat /data/prueba.txt
+OpenClaw
+
+docker volume ls
+DRIVER    VOLUME NAME
+local     mi-volumen
+
+docker volume rm mi-volumen
+mi-volumen
 
 
