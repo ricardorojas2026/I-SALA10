@@ -20,5 +20,5 @@ loom:
 
 \- \[X] B — Práctica redes + volúmenes
 
-\- \[ ] FINAL — Reflexión + evidencia + Loom
+\- \[X] FINAL — Reflexión + evidencia + Loom
 
